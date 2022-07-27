@@ -34,6 +34,17 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col-6 mx-auto">
+            <%
+                String success = request.getParameter("success");
+                if(success!=null){
+            %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Item Added Successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <%
+                }
+            %>
             <form action="/apply" method="post">
                 <div class="row mt-3">
                     <div class="col-12">

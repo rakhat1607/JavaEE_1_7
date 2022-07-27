@@ -6,15 +6,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 
-@WebServlet(value = "/homeservlet")
-public class HomeServlet extends HttpServlet {
+@WebServlet(value = "/details")
+public class DetailServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request , HttpServletResponse response) throws IOException,  ServletException {
-        ArrayList<Item> items = DBUtil.getAllItems();
-        request.setAttribute("gadjet" ,items);
-        request.getRequestDispatcher("/main.jsp").forward(request,response);
+        Long id = Long.parseLong(request.getParameter("id"));
+        Item item   = DBUtil.getItem(id);
+        request.setAttribute("item",item);
+        request.getRequestDispatcher("/details.jsp").forward(request,response);
     }
 }

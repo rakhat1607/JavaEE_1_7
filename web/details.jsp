@@ -1,3 +1,4 @@
+<%@ page import="kz.bitlab.Item" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,24 +36,29 @@
     <div class="row mt-3">
         <div class="col-6 mx-auto">
             <%
+                Item item = (Item)request.getAttribute("item");
+                if(item!=null){
+            %>
+            <%
                 String success = request.getParameter("success");
                 if(success!=null){
             %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Item Added Successfully!
+                Item UPdated Successfully!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <%
                 }
             %>
-            <form action="/apply" method="post">
+            <form action="/update" method="post">
+                <input type="hidden" name="user_id" value="<%=item.getId()%>">
                 <div class="row mt-3">
                     <div class="col-12">
                         <label>NAME :</label>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="item_name" required>
+                            <input type="text" class="form-control" name="item_name" required value="<%=item.getName()%>">
                         </div>
                     </div>
                 </div>
@@ -62,7 +68,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="item_price" required>
+                            <input type="text" class="form-control" name="item_price" required value="<%=item.getPrice()%>">
                         </div>
                     </div>
                 </div>
@@ -72,16 +78,42 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="item_amount" required>
+                            <input type="text" class="form-control" name="item_amount" required value="<%=item.getAmount()%>">
                         </div>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <button class="btn btn-success">ADD Item</button>
+                        <button class="btn btn-success">UPDATE Item</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">DELETE Item</button>
                     </div>
                 </div>
             </form>
+            <div class="modal fade" id="deleteItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="/delete" method="post">
+                            <input type="hidden" name="id" value="<%=item.getId()%>">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Confirm Delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button  class="btn btn-danger">Yes</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <%
+                }
+            %>
         </div>
     </div>
 

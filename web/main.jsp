@@ -43,28 +43,26 @@
                     <th>NAME</th>
                     <th>PRICE</th>
                     <th>AMOUNT</th>
-                    <th>DETAILS</th>
+                    <th style="width: 10%">DETAILS</th>
                 </tr>
                 </thead>
                 <tbody>
 
                     <%
                         ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("gadjet");
-                        int id = 1;
                         for (Item itm : items) {
                             
 
                     %>
                         <tr>
-                            <td><%=id%></td>
+                            <td><%=itm.getId()%></td>
                             <td><%=itm.getName()%></td>
                             <td><%=itm.getPrice()%></td>
                             <td><%=itm.getAmount()%></td>
-                            <td><span class="badge bg-dark">DETAILS</span></td>
+                            <td><a href="/details?id=<%=itm.getId()%>" class="btn btn-dark btn-sm">DETAILS</a></td>
                         </tr>
 
                     <%
-                        id++;
                         }
 
                     %>
